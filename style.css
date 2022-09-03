@@ -1,0 +1,44 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  width: 80%;
+}
+
+#newItem-el {
+  height: 20px;
+  width: 250px;
+  padding: 5px;
+  margin: 2px;
+}
+
+#addBtn-el {
+  width: 135px;
+  height: 30px;
+  padding: 5px;
+  margin: 2px;
+  background-color: #5f9341;
+  color: #fff;
+  border: none
+}
+
+#removeBtn-el {
+  width: 135px;
+  height: 30px;
+  padding: 5px;
+  margin: 2px;
+  background-color: #F2331C;
+  color: #fff;
+  border: none
+}
+
+#todoList-el {
+  margin-bottom: 15px;
+}
+
+#todoLi {
+  list-style: none;
+  padding-left: 10px;
+  margin: 5px;
+}
