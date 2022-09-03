@@ -1,0 +1,55 @@
+body {
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.container {
+  width: 80%;
+}
+
+.header {
+  position: relative;
+  background-color: #166262;
+  height: 100px;
+  border: 1px solid #000;
+}
+
+.clear {
+  text-align: right;
+  color: #fff;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.date {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  color: #fff;
+}
+
+#list {
+  list-style: none;
+  padding-left: 10px;
+}
+
+ .text {
+  display: inline;
+  border: 1px solid #000;
+}
+
+.complete {
+  border: 1px solid #000;
+}
+
+.delete{
+  border: 1px solid #000;
+}
+
+input {
+  border: none;
+  height: 30px;
+}
+
+#plus-btn {
+  color: #166262 ;
+}
