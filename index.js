@@ -2,16 +2,37 @@
 let LIST = [];
 let id = 0;
 
-const clear = document.querySelector(".clear");
-const enterKey = document.querySelector("plus-btn");
+/*
+let variable = localStorage.setItem('key');
+localStorage.setItem("TODO", JSON.stringify(LIST));
+let data = localStorage.getItem("TODO")
+if(data) {
+  LIST = JSON.parse(data);
+  loadToDo(LIST);
+  id = LIST.length;
+} else {
+  LIST = [];
+  id = 0;
+}
+*/
 
+
+
+const enterKey = document.querySelector("#plus-btn");
+
+const clear = document.querySelector(".clear");
 const dateElement = document. getElementById("date");
 const list = document.getElementById("list");
-const input = doucment.getElementById("input");
+const input = document.getElementById("input");
 
 const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle-thin";
 const LINE_THROUGH = "lineThrough";
+
+// Display the date
+const options = {weekday: 'long', month: 'short', day: 'numeric'};
+const today = new Date();
+dateElement.innerHTML = today.toLocaleDateString("en-US", options);
 
 function addToDo(toDo, id, done, trash) {
 
@@ -22,7 +43,7 @@ function addToDo(toDo, id, done, trash) {
   const DONE = done ? CHECK : UNCHECK;
   const LINE  =  done ? LINE_THROUGH : ""; 
 
-  const text = `<li class="item">
+  const item = `<li class="item">
                   <i class="fa ${DONE} complete" job ="complete" id="${id}"></i>
                   <p class="text ${LINE}"> ${toDo} </p>
                   <i class="fa fa-trash-o" job="delete" id="${id}"></i>
@@ -30,14 +51,19 @@ function addToDo(toDo, id, done, trash) {
 
   const position = "beforeend";
 
-  list.insertAdjacentElement(position, text);
+  list.insertAdjacentHTML(position, item);
 } 
 
 function completeToDo(element) {
-  element.clasList.toggle(CHECK);
-  element.clasList.toggle(UNCHECK);
-  element.parentNode.querySelector(".text").clasList.toggle(LINE_THROUGH);
+  element.classList.toggle(CHECK);
+  element.classList.toggle(UNCHECK);
+  element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
   LIST[element.id].done = LIST[element.id].done ? false : true;
+}
+
+function removeToDo(element) {
+  element.parentNode.parentNode.removeChild(element.parentNode);
+  LIST[element.id].trash = true;
 }
 
 enterKey.addEventListener("keyup", (e) => {
@@ -58,3 +84,26 @@ enterKey.addEventListener("keyup", (e) => {
     id++;
   }  
 });
+
+function loadToDo(array) {
+  array.forEach(function(item) {
+    addToDo(item.name, item.id, item.done, item.trash);
+  });
+}
+
+list.addEventListener("click", function(event) {
+  let element = event.target;
+  const elementJOB = event.attributes.job.value;
+  if(elementJOB == "complete") {
+    completeToDo(element);
+  } else if(elementJOB == "delete") {
+    removeToDo(element)
+  }
+})
+
+clear.addEventListener("click", function() {
+  localStorage.clear();
+  location.reload();
+});
+
+addToDo("Walk the dog", 1, true, false)
