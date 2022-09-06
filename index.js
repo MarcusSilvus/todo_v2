@@ -2,22 +2,6 @@
 let LIST = [];
 let id = 0;
 
-/*
-let variable = localStorage.setItem('key');
-localStorage.setItem("TODO", JSON.stringify(LIST));
-let data = localStorage.getItem("TODO")
-if(data) {
-  LIST = JSON.parse(data);
-  loadToDo(LIST);
-  id = LIST.length;
-} else {
-  LIST = [];
-  id = 0;
-}
-*/
-
-
-
 const enterKey = document.querySelector("#plus-btn");
 
 const clear = document.querySelector(".clear");
@@ -33,6 +17,20 @@ const LINE_THROUGH = "lineThrough";
 const options = {weekday: 'long', month: 'short', day: 'numeric'};
 const today = new Date();
 dateElement.innerHTML = today.toLocaleDateString("en-US", options);
+
+// get item from local storage
+let data = localStorage.getItem("TODO")
+//let variable = localStorage.setItem('key');
+
+if(data) {
+  LIST = JSON.parse(data);
+  id = LIST.length;
+  loadToDo(LIST);
+} else {
+  LIST = [];
+  id = 0;
+}
+
 
 function addToDo(toDo, id, done, trash) {
 
@@ -69,20 +67,20 @@ function removeToDo(element) {
 enterKey.addEventListener("keyup", (e) => {
   if(e.keyCode === 13) {
     const toDo = input.value;
+    console.log("ENTER")
     if(toDo) {
       addToDo(toDo, id, false, false)
-      LIST.push(
-        {
+      LIST.push({
           name: toDo,
           id: id,
           done: false,
           trash: false
-        }
-      )
+        });
     }
-    input.value = "";
+    localStorage.setItem("TODO", JSON.stringify(LIST)); // add item to local storage
     id++;
   }  
+  input.value = "";
 });
 
 function loadToDo(array) {
@@ -92,18 +90,17 @@ function loadToDo(array) {
 }
 
 list.addEventListener("click", function(event) {
-  let element = event.target;
-  const elementJOB = event.attributes.job.value;
+  let element = event.target; // returns the clicked element in the list
+  const elementJOB = element.attributes.job.value; // complete or delete 
   if(elementJOB == "complete") {
     completeToDo(element);
   } else if(elementJOB == "delete") {
     removeToDo(element)
   }
+  localStorage.setItem("TODO", JSON.stringify(LIST)); // add item to local storage
 })
 
 clear.addEventListener("click", function() {
   localStorage.clear();
   location.reload();
 });
-
-addToDo("Walk the dog", 1, true, false)
