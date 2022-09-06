@@ -20,7 +20,7 @@ body {
   margin-right: 10px;
 }
 
-.date {
+#date {
   position: absolute;
   bottom: 5px;
   left: 5px;
@@ -34,15 +34,11 @@ body {
 
  .text {
   display: inline;
-  border: 1px solid #000;
+  /*border: 1px solid #000;*/
 }
 
 .complete {
-  border: 1px solid #000;
-}
-
-.delete{
-  border: 1px solid #000;
+  color: #166262 ;
 }
 
 input {

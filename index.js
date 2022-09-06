@@ -67,7 +67,7 @@ function removeToDo(element) {
 enterKey.addEventListener("keyup", (e) => {
   if(e.keyCode === 13) {
     const toDo = input.value;
-    console.log("ENTER")
+    
     if(toDo) {
       addToDo(toDo, id, false, false)
       LIST.push({
@@ -92,6 +92,7 @@ function loadToDo(array) {
 list.addEventListener("click", function(event) {
   let element = event.target; // returns the clicked element in the list
   const elementJOB = element.attributes.job.value; // complete or delete 
+  console.log("ENTER")
   if(elementJOB == "complete") {
     completeToDo(element);
   } else if(elementJOB == "delete") {
@@ -104,3 +105,5 @@ clear.addEventListener("click", function() {
   localStorage.clear();
   location.reload();
 });
+
+addToDo("Walk dog", 1, true, false)
